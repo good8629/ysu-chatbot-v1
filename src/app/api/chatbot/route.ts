@@ -2,7 +2,8 @@ export async function POST(req: Request) {
     try
     {
         const { question, language } = await req.json();
-        const res = await fetch("http://localhost:8080/v1/chatbot/talk", {
+        //const res = await fetch("http://localhost:8080/v1/chatbot/talk", {
+        const res = await fetch("http://34.64.57.152:8080/v1/chatbot/talk", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ question, language }),
