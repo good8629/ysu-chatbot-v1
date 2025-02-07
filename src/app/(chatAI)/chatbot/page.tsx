@@ -26,7 +26,7 @@ export default function Home() {
                         <Image src="/images/demo_info_v1.png" alt="Chat AI Demo Version infomation" width={800} height={852}></Image>
                     </div>
                     <div className={styles.pc_right}>
-                        <iframe src="/" width="393" height="852" className={styles.pc_background}></iframe>
+                        <iframe src="/" width="393" height="852" className={styles.pc_background} scrolling="no"></iframe>
                     </div>
                 </div>
             </div>

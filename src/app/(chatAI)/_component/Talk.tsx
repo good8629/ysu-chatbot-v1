@@ -56,7 +56,7 @@ export default function Talk() {
         if (lang == "Korean") {
             setLanguageMessage("한국어");
             setPlaceholderMessage("대화를 입력 해보세요.");
-            setDropdownLanguage("Language");
+            setDropdownLanguage("Korean");
             setUseMessage("이용중");
             setMessages([]);
             setMessages([{
@@ -69,7 +69,7 @@ export default function Talk() {
         } else if(lang == "English (American)") {
             setLanguageMessage("미국 영어");
             setPlaceholderMessage("Enter a conversation.");
-            setDropdownLanguage("Language");
+            setDropdownLanguage("English");
             setUseMessage("In use");
             setMessages([]);
             setMessages([{
@@ -82,7 +82,7 @@ export default function Talk() {
         } else if(lang == "Vietnamese") {
             setLanguageMessage("베트남어");
             setPlaceholderMessage("Hãy nhập đoạn hội thoại.");
-            setDropdownLanguage("ngôn ngữ");
+            setDropdownLanguage("Vietnamese");
             setUseMessage("Đang sử dụng");
             setMessages([]);
             setMessages([{
@@ -95,7 +95,7 @@ export default function Talk() {
         } else if(lang == "Arabic (Modern Standard)") {
             setLanguageMessage("현대 표준 아랍어");
             setPlaceholderMessage("أدخل محادثة.");
-            setDropdownLanguage("لغة");
+            setDropdownLanguage("Arabic");
             setUseMessage("في الاستخدام");
             setMessages([]);
             setMessages([{
@@ -109,7 +109,7 @@ export default function Talk() {
             setLanguageMessage("인도네시아어");
             setUseMessage("Sedang digunakan");
             setPlaceholderMessage("Masukan percakapan Anda.");
-            setDropdownLanguage("bahasa");
+            setDropdownLanguage("Indonesian");
             setMessages([]);
             setMessages([{
                 message: 'Selamat siang! Saya adalah Youngsan AI Counselor, “Youngsani”, dari Youngsan University. Silakan bertanya tentang universitas kami. Semakin spesifik pertanyaan Anda, semakin akurat jawaban yang akan Anda dapatkan. \n\nContohnya, informasi tentang jurusan, prosedur pendaftaran, atau panduan beasiswa.',
@@ -122,7 +122,7 @@ export default function Talk() {
             setLanguageMessage("일본어");
             setUseMessage("使用中");
             setPlaceholderMessage("対話を入力してみてください.");
-            setDropdownLanguage("言語");
+            setDropdownLanguage("Japanese");
             setMessages([]);
             setMessages([{
                 message: 'こんにちは！私は英山大学留学相談AI「영산이」です。\n\n私たちの大学について、何でも質問してください！質問が具体的であればあるほど、正確な回答を得ることができます。 例えば、学科の情報、応募手続き、奨学金制度などの情報提供ができます',
@@ -135,7 +135,7 @@ export default function Talk() {
             setLanguageMessage("간체 중국어");
             setUseMessage("使用中");
             setPlaceholderMessage("请输入对话.");
-            setDropdownLanguage("言語");
+            setDropdownLanguage("Chinese");
             setMessages([]);
             setMessages([{
                 message: '你好！我是영산대학교留学咨询AI“영산이”。关于我们大学，你有什么问题都可以问我！问题越具体，你获得的答案就越准确。例如，你可以询问专业信息、申请流程、奖学金等内容。',
@@ -176,7 +176,6 @@ export default function Talk() {
             }
 
             const data = await res.json();
-            console.log(data);
 
             let urls = [];
             if (data.info.action != 'MS001') {
@@ -188,9 +187,6 @@ export default function Talk() {
             if(data.info.action == "MS002") {
                 videos = data.info.sub_info.videos;
             }
-
-            console.log(data.info.action);
-            console.log(videos);
 
             const reMessage: responseMessage = {
                 question: data.question,
@@ -355,7 +351,6 @@ export default function Talk() {
         //             {msg.videos[0].title}
         //         </p>
         //     </div>
-    
         // )
     }
 
