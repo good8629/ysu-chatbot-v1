@@ -1,5 +1,3 @@
-/* eslint-disable react/no-unescaped-entities */
-
 "use client";
 
 import styles from './talk.module.css';
@@ -13,6 +11,13 @@ interface Message {
     autherType: number;         // 0: AI, 1: 사용자
     action: string;
     urls: string[];
+    videos: YouTubes[];
+}
+
+interface YouTubes{
+    title: string,
+    url: string,
+    thumbnails: string
 }
 
 interface responseMessage {
@@ -20,6 +25,7 @@ interface responseMessage {
     answer: string;
     action: string;
     urls: string[];
+    videos: YouTubes[];
 }
 
 export default function Talk() {
@@ -40,7 +46,8 @@ export default function Talk() {
             message: '반갑습니다! 저는 영산대학교 유학 상담 AI ‘영산이’ 입니다. 우리 대학에 대해서 무엇이든 물어보세요! 질문이 구체적일수록 정확한 답변을 받으실 수 있어요. 예를 들어, 학과 정보, 지원 절차, 장학금 안내 등이 있습니다.', 
             autherType: 0, 
             action: 'MS001', 
-            urls: [] 
+            urls: [],
+            videos: []
         }
     ]);
 
@@ -56,7 +63,8 @@ export default function Talk() {
                 message: '반갑습니다! 저는 영산대학교 유학 상담 AI ‘영산이’ 입니다. 우리 대학에 대해서 무엇이든 물어보세요! 질문이 구체적일수록 정확한 답변을 받으실 수 있어요. 예를 들어, 학과 정보, 지원 절차, 장학금 안내 등이 있습니다.',
                 autherType: 0,
                 action: 'MS001',
-                urls: []
+                urls: [],
+                videos: []
             }])
         } else if(lang == "English (American)") {
             setLanguageMessage("미국 영어");
@@ -68,7 +76,8 @@ export default function Talk() {
                 message: 'Hello! I am Yeongsan AI, a study abroad counseling AI at Yeongsand University. Ask me anything about our university! The more specific your question is, the more accurate your answer will be. For example, you can ask about department information, application procedures, scholarship information, and more',
                 autherType: 0,
                 action: 'MS001',
-                urls: []
+                urls: [],
+                videos: []
             }])
         } else if(lang == "Vietnamese") {
             setLanguageMessage("베트남어");
@@ -80,7 +89,8 @@ export default function Talk() {
                 message: 'Xin chào! Tôi là Youngsan AI, trợ lý tư vấn du học tại Đại học Youngsan. Bạn có thể hỏi tôi bất cứ điều gì về trường đại học của chúng tôi! Càng cụ thể câu hỏi của bạn, tôi càng cung cấp cho bạn câu trả lời chính xác hơn. Ví dụ như thông tin về khoa, thủ tục ứng tuyển, thông tin về học bổng, v.v.', 
                 autherType: 0,
                 action: 'MS001',
-                urls: []
+                urls: [],
+                videos: []
             }]);
         } else if(lang == "Arabic (Modern Standard)") {
             setLanguageMessage("현대 표준 아랍어");
@@ -92,7 +102,8 @@ export default function Talk() {
                 message: "مرحبا! أنا \"يونغسان\" ، مساعد الذكاء الاصطناعي للاستشارات الدراسية في جامعة يونغسان. اسألني أي شيء عن جامعتنا! ستحصل على إجابات أكثر دقة إذا كانت أسئلتك محددة. على سبيل المثال، يمكنك سؤالي عن معلومات القسم، وإجراءات التقديم، ومعلومات المنح الدراسية، وغيرها الكثير.", 
                 autherType: 0,
                 action: 'MS001',
-                urls: []
+                urls: [],
+                videos: []
             }]);
         } else if(lang == "Indonesian") {
             setLanguageMessage("인도네시아어");
@@ -104,7 +115,8 @@ export default function Talk() {
                 message: 'Selamat siang! Saya adalah Youngsan AI Counselor, “Youngsani”, dari Youngsan University. Silakan bertanya tentang universitas kami. Semakin spesifik pertanyaan Anda, semakin akurat jawaban yang akan Anda dapatkan. \n\nContohnya, informasi tentang jurusan, prosedur pendaftaran, atau panduan beasiswa.',
                 autherType: 0,
                 action: 'MS001',
-                urls: []
+                urls: [],
+                videos: []
             }]);
         } else if(lang == "Japanese") {
             setLanguageMessage("일본어");
@@ -116,7 +128,8 @@ export default function Talk() {
                 message: 'こんにちは！私は英山大学留学相談AI「영산이」です。\n\n私たちの大学について、何でも質問してください！質問が具体的であればあるほど、正確な回答を得ることができます。 例えば、学科の情報、応募手続き、奨学金制度などの情報提供ができます',
                 autherType: 0,
                 action: 'MS001',
-                urls: []
+                urls: [],
+                videos: []
             }]);
         } else if(lang == "Chinese (Simplified)") {
             setLanguageMessage("간체 중국어");
@@ -128,7 +141,8 @@ export default function Talk() {
                 message: '你好！我是영산대학교留学咨询AI“영산이”。关于我们大学，你有什么问题都可以问我！问题越具体，你获得的答案就越准确。例如，你可以询问专业信息、申请流程、奖学金等内容。',
                 autherType: 0,
                 action: 'MS001',
-                urls: []
+                urls: [],
+                videos: []
             }]);
         } else {
             //redirect('/');
@@ -140,114 +154,17 @@ export default function Talk() {
                 message: '반갑습니다! 저는 영산대학교 유학 상담 AI ‘영산이’ 입니다. 우리 대학에 대해서 무엇이든 물어보세요! 질문이 구체적일수록 정확한 답변을 받으실 수 있어요. 예를 들어, 학과 정보, 지원 절차, 장학금 안내 등이 있습니다.',
                 autherType: 0,
                 action: 'MS001',
-                urls: []
+                urls: [],
+                videos: []
             }])
         }
 
     }, [searchParams]); // searchParams가 변경될 때 실행
 
-    // const lang = searchParams.selectedLang || "Korean";
-
-    // if (lang == "Korean") {
-    //     setLanguageMessage("한국어");
-    //     setPlaceholderMessage("대화를 입력 해보세요.");
-    //     setDropdownLanguage("Language");
-    //     setUseMessage("이용중");
-    //     setMessages([]);
-    //     setMessages([{
-    //         message: '반갑습니다! 저는 영산대학교 유학 상담 AI ‘영산이’ 입니다. 우리 대학에 대해서 무엇이든 물어보세요! 질문이 구체적일수록 정확한 답변을 받으실 수 있어요. 예를 들어, 학과 정보, 지원 절차, 장학금 안내 등이 있습니다.',
-    //         autherType: 0,
-    //         action: 'MS001',
-    //         urls: []
-    //     }])
-    // } else if(lang == "English (American)") {
-    //     setLanguageMessage("미국 영어");
-    //     setPlaceholderMessage("Enter a conversation.");
-    //     setDropdownLanguage("Language");
-    //     setUseMessage("In use");
-    //     setMessages([]);
-    //     setMessages([{
-    //         message: 'Hello! I am Yeongsan AI, a study abroad counseling AI at Yeongsand University. Ask me anything about our university! The more specific your question is, the more accurate your answer will be. For example, you can ask about department information, application procedures, scholarship information, and more',
-    //         autherType: 0,
-    //         action: 'MS001',
-    //         urls: []
-    //     }])
-    // } else if(lang == "Vietnamese") {
-    //     setLanguageMessage("베트남어");
-    //     setPlaceholderMessage("Hãy nhập đoạn hội thoại.");
-    //     setDropdownLanguage("ngôn ngữ");
-    //     setUseMessage("Đang sử dụng");
-    //     setMessages([]);
-    //     setMessages([{
-    //         message: 'Xin chào! Tôi là Youngsan AI, trợ lý tư vấn du học tại Đại học Youngsan. Bạn có thể hỏi tôi bất cứ điều gì về trường đại học của chúng tôi! Càng cụ thể câu hỏi của bạn, tôi càng cung cấp cho bạn câu trả lời chính xác hơn. Ví dụ như thông tin về khoa, thủ tục ứng tuyển, thông tin về học bổng, v.v.', 
-    //         autherType: 0,
-    //         action: 'MS001',
-    //         urls: []
-    //     }]);
-    // } else if(lang == "Arabic (Modern Standard)") {
-    //     setLanguageMessage("현대 표준 아랍어");
-    //     setPlaceholderMessage("أدخل محادثة.");
-    //     setDropdownLanguage("لغة");
-    //     setUseMessage("في الاستخدام");
-    //     setMessages([]);
-    //     setMessages([{
-    //         message: "مرحبا! أنا \"يونغسان\" ، مساعد الذكاء الاصطناعي للاستشارات الدراسية في جامعة يونغسان. اسألني أي شيء عن جامعتنا! ستحصل على إجابات أكثر دقة إذا كانت أسئلتك محددة. على سبيل المثال، يمكنك سؤالي عن معلومات القسم، وإجراءات التقديم، ومعلومات المنح الدراسية، وغيرها الكثير.", 
-    //         autherType: 0,
-    //         action: 'MS001',
-    //         urls: []
-    //     }]);
-    // } else if(lang == "Indonesian") {
-    //     setLanguageMessage("인도네시아어");
-    //     setUseMessage("Sedang digunakan");
-    //     setPlaceholderMessage("Masukan percakapan Anda.");
-    //     setDropdownLanguage("bahasa");
-    //     setMessages([]);
-    //     setMessages([{
-    //         message: 'Selamat siang! Saya adalah Youngsan AI Counselor, “Youngsani”, dari Youngsan University. Silakan bertanya tentang universitas kami. Semakin spesifik pertanyaan Anda, semakin akurat jawaban yang akan Anda dapatkan. \n\nContohnya, informasi tentang jurusan, prosedur pendaftaran, atau panduan beasiswa.',
-    //         autherType: 0,
-    //         action: 'MS001',
-    //         urls: []
-    //     }]);
-    // } else if(lang == "Japanese") {
-    //     setLanguageMessage("일본어");
-    //     setUseMessage("使用中");
-    //     setPlaceholderMessage("対話を入力してみてください.");
-    //     setDropdownLanguage("言語");
-    //     setMessages([]);
-    //     setMessages([{
-    //         message: 'こんにちは！私は英山大学留学相談AI「영산이」です。\n\n私たちの大学について、何でも質問してください！質問が具体的であればあるほど、正確な回答を得ることができます。 例えば、学科の情報、応募手続き、奨学金制度などの情報提供ができます',
-    //         autherType: 0,
-    //         action: 'MS001',
-    //         urls: []
-    //     }]);
-    // } else if(lang == "Chinese (Simplified)") {
-    //     setLanguageMessage("간체 중국어");
-    //     setUseMessage("使用中");
-    //     setPlaceholderMessage("请输入对话.");
-    //     setDropdownLanguage("言語");
-    //     setMessages([]);
-    //     setMessages([{
-    //         message: '你好！我是영산대학교留学咨询AI“영산이”。关于我们大学，你有什么问题都可以问我！问题越具体，你获得的答案就越准确。例如，你可以询问专业信息、申请流程、奖学金等内容。',
-    //         autherType: 0,
-    //         action: 'MS001',
-    //         urls: []
-    //     }]);
-    // } else {
-    //     //redirect('/');
-    //     setLanguageMessage("한국어");
-    //     setPlaceholderMessage("대화를 입력 해보세요.");
-    //     setUseMessage("이용중");
-    //     setMessages([]);
-    //     setMessages([{
-    //         message: '반갑습니다! 저는 영산대학교 유학 상담 AI ‘영산이’ 입니다. 우리 대학에 대해서 무엇이든 물어보세요! 질문이 구체적일수록 정확한 답변을 받으실 수 있어요. 예를 들어, 학과 정보, 지원 절차, 장학금 안내 등이 있습니다.',
-    //         autherType: 0,
-    //         action: 'MS001',
-    //         urls: []
-    //     }])
-    // }
-
     const sendMessageToServer = async (userQuestion: string) => {
         try {
+            setIsSend(false);
+
             const res = await fetch("/api/chatbot", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -259,24 +176,34 @@ export default function Talk() {
             }
 
             const data = await res.json();
-            //console.log(data);
+            console.log(data);
 
             let urls = [];
             if (data.info.action != 'MS001') {
                 urls = data.info.sub_info.urls;
             }
 
+            // 유튜브 틀어달라는 영상일때 전달받음
+            let videos = [];
+            if(data.info.action == "MS002") {
+                videos = data.info.sub_info.videos;
+            }
+
+            console.log(data.info.action);
+            console.log(videos);
+
             const reMessage: responseMessage = {
                 question: data.question,
                 answer: data.info.message,
                 action: data.info.action,
-                urls: urls
+                urls: urls,
+                videos: videos
             };
 
             // 3. AI 답변을 타이핑 효과로 표시하기 전에 빈 AI 메시지 블록 추가
             setMessages((prevMessages) => [
                 ...prevMessages,
-                { message: "", autherType: 0, action: data.info.action, urls: urls } // 빈 메시지 추가 후 타이핑
+                { message: "", autherType: 0, action: data.info.action, urls: urls, videos: videos } // 빈 메시지 추가 후 타이핑
             ]);
 
             // 2. 입력 필드 초기화
@@ -286,7 +213,7 @@ export default function Talk() {
 
         } catch (error) {
             setIsSend(true);
-            setIsSend(false);
+            //setIsSend(false);
             console.error("Error while sending request:", error);
         } finally {
             setIsSend(false);
@@ -301,10 +228,6 @@ export default function Talk() {
         if (!question.trim()) return;
         //question.indexOf("영산대") == -1 ? setIsCheck(true) : setIsCheck(false);
         
-        //console.log("영산대 여부: ",isCheck);
-        // 로딩바 표시
-        //setIsLoading(true);
-        
         // setTimeout을 사용하여 입력값 초기화 시점 조정
         setTimeout(() => {
             setQuestion("");
@@ -317,85 +240,12 @@ export default function Talk() {
         // 1️. 사용자 질문 추가
         setMessages((prevMessages) => [
             ...prevMessages,
-            { message: question, autherType: 1, action: 'MS001', urls: [] }
+            { message: question, autherType: 1, action: 'MS001', urls: [], videos: [] }
         ]);
 
         // 2. 입력 필드 초기화
         setQuestion("");
     }
-
-    // async function handleSubmit() {
-    //     if (!question.trim()) return;
-
-    //     if (question.indexOf("영산대") == -1) {
-    //         setIsCheck(true);
-    //     }
-        
-    //     // 로딩바 표시
-    //     setIsLoading(true);
-        
-    //     // setTimeout을 사용하여 입력값 초기화 시점 조정
-    //     setTimeout(() => {
-    //         setQuestion("");
-    //     }, 50);
-
-    //     //enterPressed.current = false; // 다시 입력 가능하도록 초기화
-
-    //     // 1️. 사용자 질문 추가
-    //     setMessages((prevMessages) => [
-    //         ...prevMessages,
-    //         { message: question, autherType: 1, action: 'MS001', urls: [] }
-    //     ]);
-
-    //     // 2. 입력 필드 초기화
-    //     setQuestion("");
-
-    //     try {
-    //         setIsSend(false);
-
-    //         const res = await fetch("http://localhost:8080/v1/chatbot/talk", {
-    //             method: "POST",
-    //             headers: { "Content-Type": "application/json" },
-    //             body: JSON.stringify({ question, language }),
-    //         });
-
-    //         if (!res.ok) {
-    //             throw new Error(`Error: ${res.status}`);
-    //         }
-
-    //         const data = await res.json();
-    //         console.log(data);
-
-    //         let urls = [];
-    //         if (data.info.action != 'MS001') {
-    //             urls = data.info.sub_info.urls;
-    //         }
-
-    //         const reMessage: responseMessage = {
-    //             question: data.question,
-    //             answer: data.info.message,
-    //             action: data.info.action,
-    //             urls: urls
-    //         };
-
-    //         // 3. AI 답변을 타이핑 효과로 표시하기 전에 빈 AI 메시지 블록 추가
-    //         setMessages((prevMessages) => [
-    //             ...prevMessages,
-    //             { message: "", autherType: 0, action: data.info.action, urls: urls } // 빈 메시지 추가 후 타이핑
-    //         ]);
-
-    //         // 2. 입력 필드 초기화
-    //         setQuestion("");
-    //         //setIsLoading(false);
-    //         typingEffect(reMessage);
-
-    //     } catch (error) {
-    //         setIsSend(true);
-    //         console.error("Error while sending request:", error);
-    //     } finally {
-    //         setIsLoading(false);
-    //     }
-    // }
 
     const typingEffect = (reMessage: responseMessage) => {
         let index = 0;
@@ -412,7 +262,8 @@ export default function Talk() {
                         message: reMessage.answer,
                         autherType: 0,
                         action: reMessage.action,
-                        urls: reMessage.urls
+                        urls: reMessage.urls,
+                        videos: reMessage.videos
                     };
                     
                     setIsSend(true);            // 입력 완료시점
@@ -450,97 +301,17 @@ export default function Talk() {
                 );
             }
         } else if(msg.action == "MS002") {              // 유튜브 동작
-            // if(isCheck) {   // 영산대 일때
-            //     <>
-            //         <div className={styles.lef_chat_con}>
-            //             {index === Messages.length - 1 && typingMessage ? typingMessage : msg.message}
-            //         </div>
-            //         <div className={styles.lef_chat_con}>
-            //             <div className={`${styles.youtube_wrap} ${styles.mb15}`}>
-            //                 <Image src="/images/img-youtube01.png" alt="weather" width={116.8} height={64.34}></Image>
-            //                 <p>
-            //                     러닝 달리기 90%가 몸 망친다, 제발 꼭 ‘이렇게' 뛰세요 (미드풋,
-            //                     리어풋, 김병곤 박사)
-            //                 </p>
-            //             </div>
-            //             <div className={`${styles.youtube_wrap} ${styles.mb15}`}>
-            //                 <Image src="/images/img-youtube02.png" alt="weather" width={116.8} height={64.34}></Image>
-            //                 <p>
-            //                     마라톤 국가대표 출신 찾아가서 배운 러닝자세 [10km EP.1]
-            //                 </p>
-            //             </div>
-            //             <div className={`${styles.youtube_wrap}`}>
-            //                 <Image src="/images/img-youtube03.png" alt="weather" width={116.8} height={64.34}></Image>
-            //                 <p>
-            //                     올림픽 마라톤 골드메탈리스트 황영조 감독의 첫번째 실전강의!
-            //                     ‘미드풋? 난 아닌데...’
-            //                 </p>
-            //             </div>
-            //         </div>
-            //     </>
-            // } else {
-            //     return(
-            //         <>
-            //             <div className={styles.lef_chat_con}>
-            //                 {index === Messages.length - 1 && typingMessage ? typingMessage : msg.message}
-            //             </div>
-            //             <div className={styles.lef_chat_con}>
-            //                 <div className={`${styles.youtube_wrap} ${styles.mb15}`}>
-            //                     <Image src="/images/img-youtube01.png" alt="weather" width={116.8} height={64.34}></Image>
-            //                     <p>
-            //                         러닝 달리기 90%가 몸 망친다, 제발 꼭 ‘이렇게' 뛰세요 (미드풋,
-            //                         리어풋, 김병곤 박사)
-            //                     </p>
-            //                 </div>
-            //                 <div className={`${styles.youtube_wrap} ${styles.mb15}`}>
-            //                     <Image src="/images/img-youtube02.png" alt="weather" width={116.8} height={64.34}></Image>
-            //                     <p>
-            //                         마라톤 국가대표 출신 찾아가서 배운 러닝자세 [10km EP.1]
-            //                     </p>
-            //                 </div>
-            //                 <div className={`${styles.youtube_wrap}`}>
-            //                     <Image src="/images/img-youtube03.png" alt="weather" width={116.8} height={64.34}></Image>
-            //                     <p>
-            //                         올림픽 마라톤 골드메탈리스트 황영조 감독의 첫번째 실전강의!
-            //                         ‘미드풋? 난 아닌데...’
-            //                     </p>
-            //                 </div>
-            //             </div>
-            //         </>
-            //     )
-            // }
-            return(
-                <>
-                    <div className={styles.lef_chat_con}>
-                        <div className={`${styles.youtube_wrap} ${styles.mb15}`}>
-                            <Image src="/images/img-youtube01.png" alt="weather" width={116.8} height={64.34}></Image>
-                            <p>
-                                러닝 달리기 90%가 몸 망친다, 제발 꼭 ‘이렇게' 뛰세요 (미드풋,
-                                리어풋, 김병곤 박사)
-                            </p>
-                        </div>
-                        <div className={`${styles.youtube_wrap} ${styles.mb15}`}>
-                            <Image src="/images/img-youtube02.png" alt="weather" width={116.8} height={64.34}></Image>
-                            <p>
-                                마라톤 국가대표 출신 찾아가서 배운 러닝자세 [10km EP.1]
-                            </p>
-                        </div>
-                        <div className={`${styles.youtube_wrap}`}>
-                            <Image src="/images/img-youtube03.png" alt="weather" width={116.8} height={64.34}></Image>
-                            <p>
-                                올림픽 마라톤 골드메탈리스트 황영조 감독의 첫번째 실전강의!
-                                ‘미드풋? 난 아닌데...’
-                            </p>
-                        </div>
-                    </div>
-                </>
+            return (
+                <div className={styles.lef_chat_con}>
+                    {youtubeMessage(msg)}
+                </div>
             )
         } else if(msg.action == "MS003") {              // 날씨
-            // 데이터를 끌어오기 전이라 이미지로 대체함
+            // 이미지로 대체함
             return(
                 <>
                     <div className={styles.lef_chat_con}>
-                        <Image src="/images/img-weather.png" alt="weather" width={292} height={205.26}></Image>
+                        <Image src="/images/img-weather-v1.png" alt="weather" width={292} height={205.26}></Image>
                     </div>
                 </>
             )
@@ -562,6 +333,31 @@ export default function Talk() {
             )
         }
     };
+
+    const youtubeMessage = (msg: Message) => {
+        return(
+            msg.videos.map((item, index) => (
+                <div className={`${styles.youtube_wrap} ${styles.mb15}`} key={`youtube-${index}`}>
+                    <a className={styles.youtube_a} href={item.url} target='_blank'>
+                        <img className={`${styles.youtube_image_container} ${styles.youtube_image_fit}`} src={item.thumbnails} alt="YouTube Thumbnail" width={116.8} height={64.34} />
+                    </a>
+                    <p className={styles.youtube_p}>
+                        {item.title}
+                    </p>
+                </div>
+            ))
+        )
+        // return(
+        //     <div className={`${styles.youtube_wrap} ${styles.mb15}`} key={`youtube-${0}`}>
+        //         {/* <Image src={msg.videos[0].thumbnails} alt="youtube" width={116.8} height={64.34} layout="intrinsic"></Image> */}
+        //         <img src="https://i.ytimg.com/vi/yiRqq9KBhd4/hq720.jpg" alt="YouTube Thumbnail" width={116.8} height={64.34} />
+        //         <p>
+        //             {msg.videos[0].title}
+        //         </p>
+        //     </div>
+    
+        // )
+    }
 
     const sendMessage = () => {
         if(isSend) {

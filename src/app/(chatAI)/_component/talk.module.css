@@ -134,7 +134,28 @@
     gap: 10px;
 }
 .youtube_wrap img {
+    width: 100%;
+}
+
+.youtube_a {
     width: 40%;
+}
+
+.youtube_p {
+    width: 60%;
+    text-overflow: ellipsis;
+    white-space: normal;
+    overflow: hidden;
+}
+
+.youtube_image_container {
+    width: 116.8px; 
+    height: 64.34px;
+}
+  
+.youtube_image_fit {
+    width: 100%;
+    height: 100%;
 }
   
 /* footer */

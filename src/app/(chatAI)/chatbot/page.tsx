@@ -1,6 +1,6 @@
 "use client";
 import { useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, redirect } from "next/navigation";
 import Image from 'next/image';
 import styles from '@/app/(chatAI)/_component/talk.module.css';
 
@@ -14,7 +14,7 @@ export default function Home() {
 
         if (isMobile) {
             // 모바일 페이지로 리다이렉트
-            router.push("/mobile");
+            redirect('/');
         }
     }, [router]); 
 
@@ -23,7 +23,7 @@ export default function Home() {
             <div className={styles.pc_body}>
                 <div className={styles.pc_container}>
                     <div className={styles.pc_left}>
-                        <Image src="/images/demo_info.png" alt="Chat AI Demo Version infomation" width={800} height={852}></Image>
+                        <Image src="/images/demo_info_v1.png" alt="Chat AI Demo Version infomation" width={800} height={852}></Image>
                     </div>
                     <div className={styles.pc_right}>
                         <iframe src="/" width="393" height="852" className={styles.pc_background}></iframe>
