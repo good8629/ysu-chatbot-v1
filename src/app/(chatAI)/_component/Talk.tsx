@@ -176,7 +176,8 @@ export default function Talk() {
             }
 
             const data = await res.json();
-
+            console.log(data);
+            
             let urls = [];
             if (data.info.action != 'MS001') {
                 urls = data.info.sub_info.urls;
@@ -204,16 +205,12 @@ export default function Talk() {
 
             // 2. 입력 필드 초기화
             setQuestion("");
-            //setIsLoading(false);
             typingEffect(reMessage);
-
         } catch (error) {
             setIsSend(true);
-            //setIsSend(false);
             console.error("Error while sending request:", error);
         } finally {
             setIsSend(false);
-            //setIsLoading(false);
         }
     };
 

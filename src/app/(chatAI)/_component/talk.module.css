@@ -185,10 +185,12 @@
 }
 .chat_con {
     position: relative;
+    background-color: var(--gray-bg);
+    border-radius: 50px;
     width: 100%;
 }
 .chat_con input {
-    width: 100%;
+    width: 87%;
     font-size: 1.4rem;
   
     background-color: var(--gray-bg);
