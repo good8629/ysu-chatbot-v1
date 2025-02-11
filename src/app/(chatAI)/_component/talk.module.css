@@ -111,6 +111,7 @@
     padding: 1rem;
     font-size: 1.4rem;
     line-height: 1.7rem;
+    white-space: pre-wrap;
 }
 .lef_chat_con img {
     width: 100%;
